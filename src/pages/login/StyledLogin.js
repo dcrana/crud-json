@@ -29,3 +29,15 @@ export const StyledLoginFormWrapper = styled.div`
   width: 80%;
   margin: 10% auto 10% auto;
 `;
+
+export const StyledTitle = styled.h1`
+  color: var(--blue-1);
+  font-size: var(--x-large);  
+  font-weight: var(--font-bold);
+`;
+
+export const StyledLoginForm = styled.form`
+    margin-top: 30px;
+`
+
+
