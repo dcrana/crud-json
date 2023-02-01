@@ -13,7 +13,7 @@ export const StyledHomeTitle = styled.h1`
   font-weight: var(--font-bold);
 `;
 
-export const Button = styled.button`
+export const StyledButton = styled.button`
   margin-top: 20px;
   color: var(--blue-1);
   font-size: var(--small);

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Button, StyledHomeTitle, StyledHomeWrapper } from "./StyledHome"
+import { Button, StyledButton, StyledHomeTitle, StyledHomeWrapper } from "./StyledHome"
 
 const Home = () => {
     const navigate = useNavigate();
@@ -11,7 +11,7 @@ const Home = () => {
             <StyledHomeTitle>
                 Welcome to the our site please login to continue...
             </StyledHomeTitle>
-            <Button onClick={() => { handleNavigate('/login') }} >Login</Button>
+            <StyledButton onClick={() => { handleNavigate('/login') }} >Login</StyledButton>
         </StyledHomeWrapper>
     )
 }
