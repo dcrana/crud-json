@@ -1,9 +1,10 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { signUpFormValidators } from "../../formvalidators/signupformvalidators";
 import { encrypt } from "../../helpers/crypto";
-import { creatUser } from "../../redux/features/register/registerSlice";
+import { creatUser, getRegisterUsersList } from "../../redux/features/register/registerSlice";
 import { StyledButton } from "../home/StyledHome";
 import { StyledForm, StyledFormBox, StyledFormError, StyledFormFieldDiv, StyledFormWrapper, StyledInfoDiv, StyledInput, StyledLabel, StyledLink, StyledPageWrapper, StyledSpan, StyledTitle } from "../login/StyledLogin";
 
@@ -13,15 +14,25 @@ export const Register = () => {
     const handleNavigate = (item) => {
         item && navigate(item);
     }
-    const { register, handleSubmit, formState: { errors }, setValue } = useForm();
+    useEffect(() => {
+        dispatch(getRegisterUsersList());
+    }, []);
+    const { allUsers } = useSelector((state) => state.register);
+    const { register, handleSubmit, setError ,formState: { errors } } = useForm();
     const onSubmit = (data) => {
-        dispatch(creatUser({ ...data, password: encrypt(data?.password) })).then((e) => {
-            // console.log('event>>', e)
-            if (e.type === "register/creatUser/fulfilled") {
-                alert("Registration Succesfull")
-                navigate("/login");
-            }
-        });
+
+        if(allUsers.length > 0 && allUsers.some(item => item?.email === data?.email)){
+            setError("email",{type:'custom',message:"User with this email id is already exists!"});
+        }
+        else {
+            dispatch(creatUser({ ...data, password: encrypt(data?.password) })).then((e) => {
+                // console.log('event>>', e)
+                if (e.type === "register/creatUser/fulfilled") {
+                    alert("Registration Succesfull")
+                    navigate("/login");
+                }
+            });
+        }
     };
     return (
         <StyledPageWrapper>

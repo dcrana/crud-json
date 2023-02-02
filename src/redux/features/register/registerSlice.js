@@ -31,7 +31,6 @@ const registerSlice = createSlice({
     user: {},
     allUsers: [],
     isLoading: null,
-    msg: null,
     error: null,
   },
   reducers: {},

@@ -45,7 +45,7 @@ const Login = () => {
             return (data.email === item.email)
         })
         if (existUser.length === 0) {
-            setError("email", { type: 'custom', message: 'This email id is not exits!' });
+            setError("email", { type: 'custom', message: 'This email id is not exists!' });
         } else if (data.password === decrypt(existUser[0].password)) {
             localStorage.setItem('token', "jwttoken");
             handleNavigate('/posts')
