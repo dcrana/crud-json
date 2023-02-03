@@ -5,6 +5,6 @@ export default {
     // login
     baseUrl: BASE_URL,
     createUser: BASE_URL + "register",
-    allPosts:BASE_URL + "posts"
+    allPosts:BASE_URL + "posts",
   },
 };

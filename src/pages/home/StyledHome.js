@@ -15,6 +15,7 @@ export const StyledHomeTitle = styled.h1`
 
 export const StyledButton = styled.button`
   margin-top: 20px;
+  margin-left: ${({leftMargin})=>leftMargin ? leftMargin : '0px'};
   color: var(--blue-1);
   font-size: var(--small);
   font-weight: var(--font-semibold);

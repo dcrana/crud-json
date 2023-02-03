@@ -69,6 +69,23 @@ export const StyledInput = styled.input`
   margin: 5px;
 }
 `
+
+export const StyledTextArea = styled.textarea`
+  border: var(--border);
+  border-radius: 6px;
+  height: 48px;
+  // width: 100%;
+  padding: 15px 0px 0px 15px;
+  color: var(--blue-2);
+  overflow: auto;
+  // flex: 1;
+  &::placeholder {
+  color: var(--grey-1);
+  font-size: var(--small);
+  font-weight: var(--font-normal);
+  margin: 5px;
+}
+`
 export const StyledFormError = styled.div`
   margin-top: 5px;
   color: var(--red-1);
