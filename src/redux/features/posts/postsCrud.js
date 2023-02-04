@@ -15,5 +15,5 @@ export const editPost = (payload) => {
 };
 
 export const removePost = (payload) => {
-  return axios.delete(`${config.default.allPosts}/`,{params: {id: payload?.id}});
+  return axios.delete(`${config.default.allPosts}/${payload?.id}`);
 };

@@ -26,3 +26,32 @@ export const StyledButton = styled.button`
   border: 2px solid var(--yellow-1);
   cursor: pointer;
 `;
+
+export const StyledEditButton = styled.button`
+  margin-top: 20px;
+  margin-left: ${({leftMargin})=>leftMargin ? leftMargin : '0px'};
+  color: var(--blue-1);
+  font-size: var(--small);
+  font-weight: var(--font-semibold);
+  background: green;
+  border-radius: 6px;
+  width: 120px;
+  border: none;
+  padding: 8px 0px;
+  cursor: pointer;
+`;
+
+export const StyledDelButton = styled.button`
+  margin-top: 20px;
+  margin-left: ${({leftMargin})=>leftMargin ? leftMargin : '0px'};
+  color: var(--blue-1);
+  font-size: var(--small);
+  font-weight: var(--font-semibold);
+  background: red;
+  border-radius: 6px;
+  width: 120px;
+  padding: 8px 0px;
+  border: none;
+  margin: 0px 0px 0px 20px;
+  cursor: pointer;
+`;

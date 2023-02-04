@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -11,11 +12,10 @@ const AddNewPost = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
-    console.log('location>>', location);
     const {
         register,
         handleSubmit,
-        setError,
+        reset,
         formState: { errors },
     } = useForm();
     const onSubmit = (data) => {
@@ -24,7 +24,6 @@ const AddNewPost = () => {
         if (location?.state?.id) {
             dispatch(updatePost(editPayload)).then((e) => {
                 if (e.type === "posts/updatePost/fulfilled") {
-                    console.log('fullfilled edit')
                     navigate('/posts');
                 }
             })
@@ -37,6 +36,9 @@ const AddNewPost = () => {
             })
         }
     }
+    useEffect(()=>{
+        location?.state?.id && reset(location?.state);
+    },[location,reset])
     return (
         <StyledPageWrapper>
             <StyledFormBox>
