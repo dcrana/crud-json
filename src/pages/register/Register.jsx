@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Loader from "../../components/loader/Loader";
 import { signUpFormValidators } from "../../formvalidators/signupformvalidators";
 import { encrypt } from "../../helpers/crypto";
 import { creatUser, getRegisterUsersList } from "../../redux/features/register/registerSlice";
@@ -16,8 +17,8 @@ export const Register = () => {
     }
     useEffect(() => {
         dispatch(getRegisterUsersList());
-    }, []);
-    const { allUsers } = useSelector((state) => state.register);
+    }, [dispatch]);
+    const { allUsers,isLoading } = useSelector((state) => state.register);
     const { register, handleSubmit, setError ,formState: { errors } } = useForm();
     const onSubmit = (data) => {
 
@@ -65,7 +66,9 @@ export const Register = () => {
                             <StyledInput placeholder="Enter passoword" type="password" {...register("password", signUpFormValidators?.password)} ></StyledInput>
                             {errors.password && <StyledFormError>{errors.password?.message}</StyledFormError>}
                         </StyledFormFieldDiv>
-                        <StyledButton type="submit">Register</StyledButton>
+                        {
+                            isLoading ? <Loader/> : <StyledButton type="submit">Register</StyledButton>
+                        }
                     </StyledForm>
                     <StyledInfoDiv>
                         <StyledSpan>

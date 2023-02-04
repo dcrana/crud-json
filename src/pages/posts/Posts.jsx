@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom"
+import Loader from "../../components/loader/Loader";
+import NotFound from "../../components/noreceordfound/NotFound";
 import { deletePost, fetchAllPosts } from "../../redux/features/posts/postsSlice";
 import { StyledButton, StyledDelButton, StyledEditButton } from "../home/StyledHome"
 import { StyledButtonsWraper, StyledEditDelButtons, StyledPostBody, StyledPostCard, StyledPostCardWrapper, StyledPostsWrapper, StyledPostTitle } from "./StyledPost"
@@ -8,7 +10,7 @@ import { StyledButtonsWraper, StyledEditDelButtons, StyledPostBody, StyledPostCa
 const Posts = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { posts } = useSelector(state => state.posts);
+    const { posts ,isLoading} = useSelector(state => state.posts);
     const handleLogout = () => {
         localStorage.removeItem('token');
         navigate('/login')
@@ -36,7 +38,7 @@ const Posts = () => {
             </StyledButtonsWraper>
             <StyledPostCardWrapper>
                 {
-                    posts?.length > 0 && posts.map((item, index) => {
+                    isLoading ? <Loader /> : posts?.length > 0 ? posts.map((item, index) => {
                         return (
                             <StyledPostCard key={index}>
                                 <StyledPostTitle>
@@ -55,7 +57,7 @@ const Posts = () => {
                                 </StyledEditDelButtons>
                             </StyledPostCard>
                         )
-                    })
+                    }) : <NotFound />
                 }
             </StyledPostCardWrapper>
         </StyledPostsWrapper >

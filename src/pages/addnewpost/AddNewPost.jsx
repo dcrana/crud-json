@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import Loader from "../../components/loader/Loader";
 import { createPostValidator } from "../../formvalidators/createPostValidators";
 import { createNewPost, updatePost } from "../../redux/features/posts/postsSlice";
 import { StyledButton } from "../home/StyledHome";
@@ -11,6 +12,7 @@ const AddNewPost = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const {isLoading} = useSelector(state => state.posts);
     const location = useLocation();
     const {
         register,
@@ -70,7 +72,10 @@ const AddNewPost = () => {
                                 <StyledFormError>{errors.body?.message}</StyledFormError>
                             )}
                         </StyledFormFieldDiv>
-                        <StyledButton type="submit">Add</StyledButton>
+                        {
+                            isLoading ? <Loader/> : <StyledButton type="submit">Add</StyledButton>
+                        }
+                        
                     </StyledForm>
                 </StyledFormWrapper>
             </StyledFormBox>
