@@ -13,6 +13,7 @@ const AddNewPost = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {isLoading} = useSelector(state => state.posts);
+    const { userInfo} = useSelector(state => state.login);
     const location = useLocation();
     const {
         register,
@@ -21,8 +22,8 @@ const AddNewPost = () => {
         formState: { errors },
     } = useForm();
     const onSubmit = (data) => {
-        const payload = { ...data, postId: Math.floor((Math.random() * 1000) + 1), creator: "Divyarajsinh" };
-        const editPayload = { ...data, postId: location?.state?.postId || 0, creator: "Divyarajsinh", id: location?.state?.id };
+        const payload = { ...data, postId: Math.floor((Math.random() * 1000) + 1), creator: userInfo?.firstname || '' };
+        const editPayload = { ...data, postId: location?.state?.postId || 0, creator: userInfo?.firstname || '', id: location?.state?.id };
         if (location?.state?.id) {
             dispatch(updatePost(editPayload)).then((e) => {
                 if (e.type === "posts/updatePost/fulfilled") {
@@ -73,7 +74,7 @@ const AddNewPost = () => {
                             )}
                         </StyledFormFieldDiv>
                         {
-                            isLoading ? <Loader/> : <StyledButton type="submit">Add</StyledButton>
+                            isLoading ? <Loader/> : <StyledButton type="submit">{location?.state?.id ? "Update" : "Add"}</StyledButton>
                         }
                         
                     </StyledForm>

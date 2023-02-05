@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginFormValidators } from "../../formvalidators/loginFormValidators";
 import { decrypt } from "../../helpers/crypto";
+import { userLogin } from "../../redux/features/login/loginSlice";
 import { getRegisterUsersList } from "../../redux/features/register/registerSlice";
 import { StyledButton } from "../home/StyledHome";
 import {
@@ -26,7 +27,7 @@ const Login = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getRegisterUsersList());
-    }, []);
+    }, [dispatch]);
 
     const { allUsers } = useSelector((state) => state.register);
 
@@ -49,6 +50,7 @@ const Login = () => {
         } else if (data.password === decrypt(existUser[0].password)) {
             localStorage.setItem('token', "jwttoken");
             handleNavigate('/posts')
+            dispatch(userLogin(existUser[0]));
         }
         else {
             setError("password", { type: 'custom', message: 'Please enter correct password!' })

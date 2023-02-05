@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom"
 import Loader from "../../components/loader/Loader";
 import NotFound from "../../components/noreceordfound/NotFound";
+import { userLogout } from "../../redux/features/login/loginSlice";
 import { deletePost, fetchAllPosts } from "../../redux/features/posts/postsSlice";
 import { StyledButton, StyledDelButton, StyledEditButton } from "../home/StyledHome"
 import { StyledButtonsWraper, StyledEditDelButtons, StyledPostBody, StyledPostCard, StyledPostCardWrapper, StyledPostsWrapper, StyledPostTitle } from "./StyledPost"
@@ -13,6 +14,7 @@ const Posts = () => {
     const { posts ,isLoading} = useSelector(state => state.posts);
     const handleLogout = () => {
         localStorage.removeItem('token');
+        dispatch(userLogout());  
         navigate('/login')
     }
     useEffect(() => {
